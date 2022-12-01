@@ -3,3 +3,6 @@
 
 # input data
 *.txt
+
+# Python
+.mypy_cache
