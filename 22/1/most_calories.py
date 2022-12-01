@@ -6,7 +6,7 @@ from pathlib import Path
 
 def most_calories_in_list(calories_carried: List[List[int]]) -> int:
     # Pre: len(calories_carried) > 0
-    total_calories: List[int] = list(map((sum, calories_carried)))
+    total_calories: List[int] = list(map(sum, calories_carried))
     most_calories: int = reduce((lambda x, y: x if x > y else y), total_calories)
     return most_calories
 
