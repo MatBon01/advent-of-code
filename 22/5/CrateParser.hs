@@ -62,6 +62,7 @@ instruction =
     numToMove <- read <$> many1 digit
     string " from "
     originCrate <- read <$> many1 digit
+    string " to "
     destinationCrate <- read <$> many1 digit
     char '\n'
     return (numToMove, originCrate - 1, destinationCrate - 1)
