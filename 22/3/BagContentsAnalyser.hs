@@ -2,8 +2,11 @@ import BagContentsParser
 import Utils
 import Data.Char
 
+getDuplicateItems :: ([Item], [Item]) -> [Item]
+getDuplicateItems (c1, c2) = filter (`elem` c1) c2
+
 getDuplicateItem :: ([Item], [Item]) -> Item
-getDuplicateItem (c1, c2) = head (filter (`elem` c1) c2)
+getDuplicateItem = head . getDuplicateItems
 
 getPriority :: Item -> Int
 getPriority c
@@ -13,6 +16,11 @@ getPriority c
 
 duplicateItemPrioritySum :: [([Item], [Item])] -> Int
 duplicateItemPrioritySum = sum . map (getPriority . getDuplicateItem)
+
+getGroupBadge :: ([Item], [Item], [Item]) -> Item
+getGroupBadge (e1, e2, e3) = getDuplicateItem (common, e2)
+  where
+    common = getDuplicateItems (e1, e2)
 
 main = 
   do
