@@ -1,6 +1,9 @@
-targets = BagContentsParser
+targets = BagContentsAnalyser BagContentsParser Utils
 
 .PHONT: clean
+
+BagContentsAnalyser: BagContentsParser.hs Utils.hs
+	ghc BagContentsAnalyser.hs
 
 BagContentsParser: BagContentsParser.hs Utils.hs
 	ghc BagContentsParser.hs
@@ -8,5 +11,5 @@ BagContentsParser: BagContentsParser.hs Utils.hs
 clean:
 	rm -f *.o *.hi $(targets)
 
-run: BagContentsParser
-	cat input.txt | ./BagContentsParser
+run: BagContentsAnalyser
+	cat input.txt | ./BagContentsAnalyser

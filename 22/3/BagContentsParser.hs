@@ -1,3 +1,4 @@
+module BagContentsParser where 
 import Text.ParserCombinators.Parsec
 import Utils
 import Data.ByteString (split, length)
@@ -24,10 +25,3 @@ bagContent =
 
 parseBags :: String -> Either ParseError [([Item], [Item])]
 parseBags = parse bagsContent "(unknown)" 
-
-main =
-  do
-    input <- getContents
-    case parseBags input of
-      Right err -> do print err
-      Left result -> do print result
