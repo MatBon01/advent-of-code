@@ -1,4 +1,5 @@
 module Utils where
 
-data File = Directory String | File String Int deriving(Show)
-data Command = Cd File | Ls [File] deriving(Show)
+data FileEntry = DirectoryEntry String | FileEntry String Int deriving(Show)
+data Command = Cd FileEntry | Ls [FileEntry] deriving(Show)
+data File = Directory [(String, File)] | File Int

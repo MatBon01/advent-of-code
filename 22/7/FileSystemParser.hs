@@ -22,7 +22,7 @@ cd =
     string "cd "
     directory <- many (noneOf "\n")
     char '\n'
-    return (Cd (Directory directory))
+    return (Cd (DirectoryEntry directory))
 
 ls :: GenParser Char st Command
 ls = 
@@ -31,25 +31,25 @@ ls =
     children <- many child
     return (Ls children)
 
-child :: GenParser Char st File 
+child :: GenParser Char st FileEntry 
 child = directory <|> file
 
-directory :: GenParser Char st File
+directory :: GenParser Char st FileEntry
 directory =
   do
     string "dir "
     name <- many (noneOf "\n")
     char '\n'
-    return (Directory name)
+    return (DirectoryEntry name)
 
-file :: GenParser Char st File
+file :: GenParser Char st FileEntry
 file =
   do
     size <- read <$> many1 digit
     char ' '
     name <- many (noneOf "\n")
     char '\n'
-    return (File name size)
+    return (FileEntry name size)
 
 parseFileSystem :: String -> Either ParseError [Command]
 parseFileSystem = parse fileSystemCommands "(unknown)"
