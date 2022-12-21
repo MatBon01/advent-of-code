@@ -1,2 +1,4 @@
 module Utils where 
-data Contents a = Content a
+
+type Item = Char
+type Contents = [Item]
