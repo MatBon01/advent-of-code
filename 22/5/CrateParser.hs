@@ -43,8 +43,10 @@ noCrate =
     return Nothing
 
 crateNames :: GenParser Char st [Maybe Crate]
--- TODO:: implement --
-crateNames = return []
+crateNames =
+  do
+    sepBy (char ' ' >> many1 digit >> char ' ') (char ' ')
+    return []
 
 instructions :: GenParser Char st [Instruction]
 instructions = 
