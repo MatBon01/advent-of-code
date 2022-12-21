@@ -2,10 +2,14 @@ import PairParser
 import Utils
 
 obsoletePair :: (Range, Range) -> Bool
-obsoletePair _ = False
+obsoletePair (left, right) = right `include` left || left `include` right
+  where
+    include :: Range -> Range -> Bool
+    include (outerLower, outerUpper) (innerLower, innerUpper) = 
+      outerLower <= innerLower && outerUpper >= innerUpper
 
 countObsoletePairs :: [(Range, Range)] -> Int
-countObsoletePairs = length . filter (obsoletePair)
+countObsoletePairs = length . filter obsoletePair
 
 main = 
   do
