@@ -5,7 +5,7 @@ import Text.ParserCombinators.Parsec
 fileSystemCommands :: GenParser Char st [Command]
 fileSystemCommands = 
   do
-    many commandSegments
+    many1 commandSegments
 
 commandSegments :: GenParser Char st Command
 commandSegments = 
