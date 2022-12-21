@@ -14,11 +14,11 @@ monkey = try rootMonkey <|> normalMonkey
 normalMonkey :: GenParser Char st (MonkeyType, Monkey)
 normalMonkey =
   do
-    name <- many (noneOf ":")
+    name <- monkeyType
     string ": "
     monkey <- monkeyOperations
     char '\n'
-    return ((Name name), monkey)
+    return (name, monkey)
 
 monkeyOperations :: GenParser Char st Monkey
 monkeyOperations = try add <|> try sub <|> try mult <|> try MonkeyParser.div <|> try val
@@ -44,42 +44,51 @@ val =
     num <- read <$> many1 digit
     return (Val num)
 
+monkeyType :: GenParser Char st MonkeyType
+monkeyType = try human <|> name
+
 name :: GenParser Char st MonkeyType
 name =
   do
-    name <- many1 (noneOf "\n ")
+    name <- many1 (noneOf ":\n ")
     return (Name name)
+
+human :: GenParser Char st MonkeyType
+human =
+  do
+    string "humn"
+    return Human
 
 add :: GenParser Char st Monkey
 add =
   do
-    name1 <- name
+    name1 <- monkeyType
     string " + "
-    name2 <- name
+    name2 <- monkeyType
     return (Add name1 name2)
 
 sub :: GenParser Char st Monkey
 sub =
   do
-    name1 <- name
+    name1 <- monkeyType
     string " - "
-    name2 <- name
+    name2 <- monkeyType
     return (Sub name1 name2)
 
 mult :: GenParser Char st Monkey
 mult =
   do
-    name1 <- name
+    name1 <- monkeyType
     string " * "
-    name2 <- name
+    name2 <- monkeyType
     return (Mult name1 name2)
 
 div :: GenParser Char st Monkey
 div =
   do
-    name1 <- name
+    name1 <- monkeyType
     string " / "
-    name2 <- name
+    name2 <- monkeyType
     return (Div name1 name2)
 
 parseMonkeys :: String -> Either ParseError [(MonkeyType, Monkey)]

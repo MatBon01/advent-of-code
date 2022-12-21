@@ -21,4 +21,4 @@ main =
     input <- getContents
     case parseMonkeys input of
       Left err -> do print err
-      Right monkeys -> do print (calculateMonkey monkeys (fromJust (lookup (Name "root") monkeys)))
+      Right monkeys -> do print monkeys ; print (calculateMonkey monkeys (fromJust (lookup (Name "root") monkeys)))
