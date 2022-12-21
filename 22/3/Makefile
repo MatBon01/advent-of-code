@@ -2,7 +2,7 @@ targets = BagContentsAnalyser BagContentsParser Utils
 
 .PHONT: clean
 
-BagContentsAnalyser: BagContentsParser.hs Utils.hs
+BagContentsAnalyser: BagContentsParser.hs Utils.hs BagContentsAnalyser.hs
 	ghc BagContentsAnalyser.hs
 
 BagContentsParser: BagContentsParser.hs Utils.hs
