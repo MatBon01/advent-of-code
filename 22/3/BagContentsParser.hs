@@ -23,5 +23,20 @@ bagContent =
     char '\n'
     return contents
 
+bagSecurityGroups :: GenParser Char st [([Item], [Item], [Item])]
+bagSecurityGroups = many bagSecurityGroup
+
+-- Quesiton specified that there are three elves per group --
+bagSecurityGroup :: GenParser Char st ([Item], [Item], [Item])
+bagSecurityGroup = 
+  do
+    elf1 <- bagContent
+    elf2 <- bagContent
+    elf3 <- bagContent
+    return (elf1, elf2, elf3)
+
 parseBags :: String -> Either ParseError [([Item], [Item])]
 parseBags = parse bagsContent "(unknown)" 
+
+parseBagSecurityGroups :: String -> Either ParseError [([Item], [Item], [Item])]
+parseBagSecurityGroups = parse bagSecurityGroups "(unknown)"
