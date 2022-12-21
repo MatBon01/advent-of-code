@@ -9,4 +9,4 @@ clean:
 	rm -f *.o *.hi $(targets)
 
 run: SignalDetector
-	./SignalDetector
+	cat input.txt | ./SignalDetector
