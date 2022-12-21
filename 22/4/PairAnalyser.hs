@@ -1,8 +1,11 @@
 import PairParser
 import Utils
 
+obsoletePair :: (Range, Range) -> Bool
+obsoletePair _ = False
+
 countObsoletePairs :: [(Range, Range)] -> Int
-countObsoletePairs _ = 0
+countObsoletePairs = length . filter (obsoletePair)
 
 main = 
   do
