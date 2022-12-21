@@ -15,11 +15,19 @@ calculateResult m1 m2
   | m1 == m2 = Draw
   | otherwise = Lose
 
-
 outcomeScore :: Outcome -> Int
 outcomeScore Win = 6
 outcomeScore Draw = 3
 outcomeScore Lose = 0
+
+determineYourMove :: Outcome -> Move -> Move
+determineYourMove Draw m = m
+determineYourMove Lose Rock = Scissors
+determineYourMove Lose Paper = Rock
+determineYourMove Lose Scissors = Paper
+determineYourMove Win Rock = Paper
+determineYourMove Win Paper = Scissors
+determineYourMove Win Scissors = Rock
 
 calculateScore :: [(Move, Move)] -> Int
 calculateScore ((m1,m2) : otherRounds) =
