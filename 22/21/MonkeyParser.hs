@@ -3,41 +3,40 @@ import Text.ParserCombinators.Parsec
 import Utils
 import Data.Functor.Classes (eq2)
 
-monkeys :: GenParser Char st [(String, Monkey)]
+monkeys :: GenParser Char st [(MonkeyType, Monkey)]
 monkeys =
   do
     many monkey
 
-monkey :: GenParser Char st (String, Monkey)
-monkey = normalMonkey
+monkey :: GenParser Char st (MonkeyType, Monkey)
+monkey = try rootMonkey <|> normalMonkey
 
-normalMonkey :: GenParser Char st (String, Monkey)
+normalMonkey :: GenParser Char st (MonkeyType, Monkey)
 normalMonkey =
   do
     name <- many (noneOf ":")
     string ": "
-    monkey <- (try add <|> try sub <|> try mult <|> try MonkeyParser.div <|> try val)
+    monkey <- monkeyOperations
     char '\n'
-    return (name, monkey)
+    return ((Name name), monkey)
 
-rootMonkey :: GenParser Char st (String, Monkey)
+monkeyOperations :: GenParser Char st Monkey
+monkeyOperations = try add <|> try sub <|> try mult <|> try MonkeyParser.div <|> try val
+
+rootMonkey :: GenParser Char st (MonkeyType, Monkey)
 rootMonkey =
   do
     name <- string "root"
     string ": "
     monkey <- eq
     char '\n'
-    return (name, monkey)
+    return ((Name name), monkey)
 
 eq :: GenParser Char st Monkey
 eq =
   do
-    name1 <- name
-    char ' '
-    oneOf "+-*/"
-    char ' '
-    name2 <- name
-    return (Eq name1 name2)
+    monkey <- monkeyOperations
+    return (Eq monkey)
 
 val :: GenParser Char st Monkey
 val =
@@ -45,8 +44,11 @@ val =
     num <- read <$> many1 digit
     return (Val num)
 
-name :: GenParser Char st String
-name = many1 (noneOf "\n ")
+name :: GenParser Char st MonkeyType
+name =
+  do
+    name <- many1 (noneOf "\n ")
+    return (Name name)
 
 add :: GenParser Char st Monkey
 add =
@@ -80,5 +82,5 @@ div =
     name2 <- name
     return (Div name1 name2)
 
-parseMonkeys :: String -> Either ParseError [(String, Monkey)]
+parseMonkeys :: String -> Either ParseError [(MonkeyType, Monkey)]
 parseMonkeys = parse monkeys "(unknown)"

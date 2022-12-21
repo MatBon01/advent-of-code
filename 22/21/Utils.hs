@@ -1,3 +1,5 @@
 module Utils where
 
-data Monkey = Val Int | Add String String | Mult String String | Sub String String | Div String String | Eq String String deriving(Show)
+data MonkeyType = Name String | Human deriving(Show, Eq)
+-- Eq has alternative for what it would have been --
+data Monkey = Val Int | Add MonkeyType MonkeyType | Mult MonkeyType MonkeyType | Sub MonkeyType MonkeyType | Div MonkeyType MonkeyType | Eq Monkey deriving(Show)
