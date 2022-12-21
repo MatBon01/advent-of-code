@@ -1,6 +1,7 @@
 module MonkeyParser where
 import Text.ParserCombinators.Parsec
 import Utils
+import Data.Functor.Classes (eq2)
 
 monkeys :: GenParser Char st [(String, Monkey)]
 monkeys =
@@ -18,6 +19,25 @@ normalMonkey =
     monkey <- (try add <|> try sub <|> try mult <|> try MonkeyParser.div <|> try val)
     char '\n'
     return (name, monkey)
+
+rootMonkey :: GenParser Char st (String, Monkey)
+rootMonkey =
+  do
+    name <- string "root"
+    string ": "
+    monkey <- eq
+    char '\n'
+    return (name, monkey)
+
+eq :: GenParser Char st Monkey
+eq =
+  do
+    name1 <- name
+    char ' '
+    oneOf "+-*/"
+    char ' '
+    name2 <- name
+    return (Eq name1 name2)
 
 val :: GenParser Char st Monkey
 val =
