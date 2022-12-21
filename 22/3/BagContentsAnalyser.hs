@@ -22,9 +22,12 @@ getGroupBadge (e1, e2, e3) = getDuplicateItem (common, e3)
   where
     common = getDuplicateItems (e1, e2)
 
+securityBadgeSum :: [([Item], [Item], [Item])] -> Int
+securityBadgeSum = sum . map (getPriority . getGroupBadge)
+
 main = 
   do
     input <- getContents
-    case parseBags input of
+    case parseBagSecurityGroups input of
       Left err -> do print err
-      Right contents -> do print (duplicateItemPrioritySum contents)
+      Right contents -> do print (securityBadgeSum contents)
