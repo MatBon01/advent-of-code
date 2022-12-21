@@ -1,3 +1,4 @@
+module PairParser where
 import Utils
 import Text.ParserCombinators.Parsec
 
@@ -26,10 +27,3 @@ cleaningRange =
 
 parsePairs :: String -> Either ParseError [(Range, Range)]
 parsePairs = parse pairList "(unknown)"
-
-main =
-  do
-    input <- getContents
-    case parsePairs input of
-      Left err -> do print err
-      Right pairs -> do print pairs
