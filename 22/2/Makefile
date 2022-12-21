@@ -1,6 +1,9 @@
 ﻿.PHONY: all clean
 
-targets = RPSScorer1 RPSParser1 RPSParser Utils
+targets = RPSScorer1 RPSParser1 RPSParser Utils RPSScorer
+
+RPSScorer: RPSScorer.hs RPSParser.hs Utils.hs
+	ghc RPSScorer.hs
 
 RPSParser: RPSParser.hs Utils.hs
 	ghc RPSParser.hs
