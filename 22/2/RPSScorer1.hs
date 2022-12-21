@@ -1,4 +1,4 @@
-import RPSParser
+import RPSParser1
 
 data Outcome = Win | Draw | Lose deriving(Eq, Show)
 
@@ -19,15 +19,15 @@ calculateResult m1 m2
 
 outcomeScore :: Move -> Move -> Int
 outcomeScore m1 m2 
-  | result == Win = 0
-  | result == Draw = 0
+  | result == Win = 6
+  | result == Draw = 3
   | result == Lose = 0
   where
     result = calculateResult m1 m2
 
 calculateScore :: [(Move, Move)] -> Int
 calculateScore ((m1,m2) : otherRounds) =
-  shapeScore m2 + calculateScore otherRounds
+  shapeScore m2 + outcomeScore m1 m2 + calculateScore otherRounds
 calculateScore [] = 0
 
 main = 

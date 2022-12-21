@@ -1,4 +1,4 @@
-module RPSParser where
+module RPSParser1 where
 -- Not finished researching parsec library but using it to practice fundamentals --
 import Text.ParserCombinators.Parsec
 import GHC.IO.BufferedIO (readBufNonBlocking)
