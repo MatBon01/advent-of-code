@@ -1,8 +1,4 @@
-﻿# Haskell compilation files
-*.o
-*.hi
-
-# Solutions
+# Executables
 BagContentsAnalyser
 BagContentsParser
 Utils
