@@ -8,7 +8,10 @@ monkeys =
     many monkey
 
 monkey :: GenParser Char st (String, Monkey)
-monkey =
+monkey = normalMonkey
+
+normalMonkey :: GenParser Char st (String, Monkey)
+normalMonkey =
   do
     name <- many (noneOf ":")
     string ": "
