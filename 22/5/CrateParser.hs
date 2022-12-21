@@ -29,8 +29,12 @@ crateLevel =
     try crateNames <|> sepBy (crate <|> noCrate) (char ' ')
 
 crate :: GenParser Char st (Maybe Crate)
--- TODO:: implement --
-crate = return (Just 'a')
+crate =
+  do
+    char '['
+    crate <- anyChar
+    char ']'
+    return (Just crate)
 
 noCrate :: GenParser Char st (Maybe Crate)
 noCrate =
