@@ -39,6 +39,7 @@ directory =
   do
     string "dir "
     name <- many (noneOf "\n")
+    char '\n'
     return (Directory name)
 
 file :: GenParser Char st File
