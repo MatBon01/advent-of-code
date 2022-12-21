@@ -3,7 +3,7 @@ module RPSParser where
 import Text.ParserCombinators.Parsec
 import GHC.IO.BufferedIO (readBufNonBlocking)
 
-data Move = Rock | Paper | Scissors deriving(Show) -- TODO:: check this derivation --
+data Move = Rock | Paper | Scissors deriving(Eq, Show) -- TODO:: check this derivation --
 
 strategyGuide :: GenParser Char st [(Move, Move)]
 strategyGuide = 
