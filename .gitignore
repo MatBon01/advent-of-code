@@ -6,3 +6,7 @@
 
 # Python
 .mypy_cache
+
+# Haskell
+*.hi
+*.o
