@@ -2,7 +2,7 @@ import BagContentsParser
 import Utils
 
 getDuplicateItem :: ([Item], [Item]) -> Item
-getDuplicateItem _ = 'a'
+getDuplicateItem (c1, c2) = head (filter (`elem` c1) c2)
 
 getPriority :: Item -> Int
 getPriority _ = 0
