@@ -48,3 +48,6 @@ file =
     name <- many (noneOf "\n")
     char '\n'
     return (File name size)
+
+parseFileSystem :: String -> Either ParseError [Command]
+parseFileSystem = parse fileSystemCommands "(unknown)"
