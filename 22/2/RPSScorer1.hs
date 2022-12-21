@@ -1,5 +1,6 @@
-import RPSParser1
+import RPSParser
 import Utils
+import RPSParser (parseStrategy)
 
 shapeScore :: Move -> Int
 shapeScore Rock = 1
@@ -29,14 +30,16 @@ determineYourMove Win Rock = Paper
 determineYourMove Win Paper = Scissors
 determineYourMove Win Scissors = Rock
 
-calculateScore :: [(Move, Move)] -> Int
-calculateScore ((m1,m2) : otherRounds) =
-  shapeScore m2 + outcomeScore (calculateResult m1 m2) + calculateScore otherRounds
+calculateScore :: [(Move, Outcome)] -> Int
+calculateScore ((m,o) : otherRounds) =
+  shapeScore yourMove + outcomeScore o + calculateScore otherRounds
+  where
+    yourMove = determineYourMove o m
 calculateScore [] = 0
 
 main = 
   do 
     input <- getContents
-    case parseGame input of
+    case parseStrategy input of
         Left err -> do print err
         Right result -> do print (calculateScore result)
