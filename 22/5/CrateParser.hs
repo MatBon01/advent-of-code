@@ -33,8 +33,10 @@ crate :: GenParser Char st (Maybe Crate)
 crate = return (Just 'a')
 
 noCrate :: GenParser Char st (Maybe Crate)
--- TODO:: implement --
-noCrate = return (Nothing)
+noCrate =
+  do
+    string "   "
+    return Nothing
 
 crateNames :: GenParser Char st [Maybe Crate]
 -- TODO:: implement --
