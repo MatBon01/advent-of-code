@@ -1,5 +1,6 @@
 import Utils
 import Text.ParserCombinators.Parsec
+import Data.Maybe
 
 -- Returns the initial crane configuration and list of instructions
 craneOperations :: GenParser Char st ([[Crate]], [Instruction])
@@ -19,7 +20,7 @@ crates =
     where
       organiseLevels :: [[Maybe Crate]] -> [[Crate]]
       -- TODO:: fix this --
-      organiseLevels = map (map fromMaybe 'a')
+      organiseLevels = map (map (fromMaybe 'a'))
 
 crateLevel :: GenParser Char st [Maybe Crate]
 crateLevel = return []
