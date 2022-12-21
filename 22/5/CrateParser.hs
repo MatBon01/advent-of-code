@@ -1,6 +1,7 @@
 import Utils
 import Text.ParserCombinators.Parsec
 import Data.Maybe
+import Distribution.PackageDescription (TestSuiteInterface)
 
 -- Returns the initial crane configuration and list of instructions
 craneOperations :: GenParser Char st ([[Crate]], [Instruction])
@@ -23,7 +24,21 @@ crates =
       organiseLevels = map (map (fromMaybe 'a'))
 
 crateLevel :: GenParser Char st [Maybe Crate]
-crateLevel = return []
+crateLevel =
+  do
+    try crateNames <|> sepBy (crate <|> noCrate) (char ' ')
+
+crate :: GenParser Char st (Maybe Crate)
+-- TODO:: implement --
+crate = return (Just 'a')
+
+noCrate :: GenParser Char st (Maybe Crate)
+-- TODO:: implement --
+noCrate = return (Nothing)
+
+crateNames :: GenParser Char st [Maybe Crate]
+-- TODO:: implement --
+crateNames = return []
 
 instructions :: GenParser Char st [Instruction]
 instructions = 
