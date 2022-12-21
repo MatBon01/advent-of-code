@@ -1,5 +1,4 @@
 module RPSParser where
--- Still learning parsec library and improving Haskell --
 import Utils
 import Text.ParserCombinators.Parsec
 
