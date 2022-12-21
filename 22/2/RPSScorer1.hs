@@ -1,6 +1,5 @@
 import RPSParser1
-
-data Outcome = Win | Draw | Lose deriving(Eq, Show)
+import Utils
 
 shapeScore :: Move -> Int
 shapeScore Rock = 1

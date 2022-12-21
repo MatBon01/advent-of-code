@@ -1,9 +1,8 @@
 module RPSParser1 where
 -- Not finished researching parsec library but using it to practice fundamentals --
+import Utils
 import Text.ParserCombinators.Parsec
 import GHC.IO.BufferedIO (readBufNonBlocking)
-
-data Move = Rock | Paper | Scissors deriving(Eq, Show) -- TODO:: check this derivation --
 
 strategyGuide :: GenParser Char st [(Move, Move)]
 strategyGuide = 
