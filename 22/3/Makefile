@@ -7,3 +7,6 @@ BagContentsParser: BagContentsParser.hs Utils.hs
 
 clean:
 	rm -f *.o *.hi $(targets)
+
+run: BagContentsParser
+	cat input.txt | ./BagContentsParser
