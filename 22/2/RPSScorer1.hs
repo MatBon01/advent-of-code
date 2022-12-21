@@ -16,17 +16,14 @@ calculateResult m1 m2
   | otherwise = Lose
 
 
-outcomeScore :: Move -> Move -> Int
-outcomeScore m1 m2 
-  | result == Win = 6
-  | result == Draw = 3
-  | result == Lose = 0
-  where
-    result = calculateResult m1 m2
+outcomeScore :: Outcome -> Int
+outcomeScore Win = 6
+outcomeScore Draw = 3
+outcomeScore Lose = 0
 
 calculateScore :: [(Move, Move)] -> Int
 calculateScore ((m1,m2) : otherRounds) =
-  shapeScore m2 + outcomeScore m1 m2 + calculateScore otherRounds
+  shapeScore m2 + outcomeScore (calculateResult m1 m2) + calculateScore otherRounds
 calculateScore [] = 0
 
 main = 
