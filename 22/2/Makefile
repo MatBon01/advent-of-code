@@ -2,8 +2,8 @@
 
 targets = RPSScorer1 RPSParser1 RPSParser Utils RPSScorer
 
-RPSScorer1: RPSScorer1.hs RPSParser1.hs Utils.hs
-	ghc RPSScorer1.hs
+RPSScorer: RPSScorer.hs RPSParser1.hs Utils.hs
+	ghc RPSScorer.hs
 
 RPSParser: RPSParser.hs Utils.hs
 	ghc RPSParser.hs
