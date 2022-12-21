@@ -1,3 +1,4 @@
+module MonkeyParser where
 import Text.ParserCombinators.Parsec
 import Utils
 
@@ -11,7 +12,7 @@ monkey =
   do
     name <- many (noneOf ":")
     string ": "
-    monkey <- (try add <|> try sub <|> try mult <|> try Main.div <|> try val)
+    monkey <- (try add <|> try sub <|> try mult <|> try MonkeyParser.div <|> try val)
     char '\n'
     return (name, monkey)
 
@@ -58,10 +59,3 @@ div =
 
 parseMonkeys :: String -> Either ParseError [(String, Monkey)]
 parseMonkeys = parse monkeys "(unknown)"
-
-main =
-  do
-    input <- getContents
-    case parseMonkeys input of
-      Left err -> do print err
-      Right result -> do print result
