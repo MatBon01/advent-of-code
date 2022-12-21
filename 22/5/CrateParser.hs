@@ -17,10 +17,11 @@ crates =
     cratesOnLevel <- many crateLevel
     return (organiseLevels cratesOnLevel)
     where
-      organiseLevels :: [[Crate]] -> [[Crate]]
-      organiseLevels = id
+      organiseLevels :: [[Maybe Crate]] -> [[Crate]]
+      -- TODO:: fix this --
+      organiseLevels = map (map fromMaybe 'a')
 
-crateLevel :: GenParser Char st [Crate]
+crateLevel :: GenParser Char st [Maybe Crate]
 crateLevel = return []
 
 instructions :: GenParser Char st [Instruction]
