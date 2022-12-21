@@ -1,3 +1,4 @@
+module RPSParser where
 -- Not finished researching parsec library but using it to practice fundamentals --
 import Text.ParserCombinators.Parsec
 import GHC.IO.BufferedIO (readBufNonBlocking)
@@ -36,10 +37,3 @@ scissors =
   
 parseGame :: String -> Either ParseError [(Move, Move)]
 parseGame input = parse strategyGuide "(unknown)" input
-
-main = 
-  do 
-    input <- getContents
-    case parse strategyGuide "(stdin)" input of
-        Left err -> do print err
-        Right result -> do print result
