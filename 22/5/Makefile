@@ -7,3 +7,6 @@ CrateParser: CrateParser.hs Utils.hs
 
 clean:
 	rm -f *.o *.hi $(targets)
+
+run: CrateParser
+	cat input.txt | ./CrateParser

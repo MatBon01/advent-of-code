@@ -63,3 +63,13 @@ instruction =
     destinationCrate <- read <$> many1 digit
     char '\n'
     return (numToMove, originCrate - 1, destinationCrate - 1)
+
+parseCraneOperations :: String -> Either ParseError ([[Crate]], [Instruction])
+parseCraneOperations = parse craneOperations "(unknown)"
+
+main =
+  do
+    input <- getContents
+    case parseCraneOperations input of
+      Left err -> do print err
+      Right result -> do print result
