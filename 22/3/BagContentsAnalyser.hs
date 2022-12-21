@@ -18,7 +18,7 @@ duplicateItemPrioritySum :: [([Item], [Item])] -> Int
 duplicateItemPrioritySum = sum . map (getPriority . getDuplicateItem)
 
 getGroupBadge :: ([Item], [Item], [Item]) -> Item
-getGroupBadge (e1, e2, e3) = getDuplicateItem (common, e2)
+getGroupBadge (e1, e2, e3) = getDuplicateItem (common, e3)
   where
     common = getDuplicateItems (e1, e2)
 
