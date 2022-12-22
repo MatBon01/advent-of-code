@@ -4,11 +4,11 @@ import Data.Maybe
 
 calculateMonkey :: [(MonkeyType, Monkey)] -> Monkey -> Int
 calculateMonkey monkeys (Val num) = num
+calculateMonkey monkeys (Eq monkey) = calculateMonkey monkeys monkey
 calculateMonkey monkeys (Add m1 m2) = calculateMonkeyOp monkeys m1 m2 (+)
 calculateMonkey monkeys (Sub m1 m2) = calculateMonkeyOp monkeys m1 m2 (-)
 calculateMonkey monkeys (Mult m1 m2) = calculateMonkeyOp monkeys m1 m2 (*)
 calculateMonkey monkeys (Div m1 m2) = calculateMonkeyOp monkeys m1 m2 Prelude.div
-calculateMonkey monkeys (Eq monkey) = calculateMonkey monkeys monkey
 
 calculateMonkeyOp :: [(MonkeyType, Monkey)] -> MonkeyType -> MonkeyType -> (Int -> Int -> Int) -> Int
 calculateMonkeyOp monkeys m1 m2 op = calculateMonkey monkeys m1' `op` calculateMonkey monkeys m2'
