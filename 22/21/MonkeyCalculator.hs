@@ -16,6 +16,18 @@ calculateMonkeyOp monkeys m1 m2 op = calculateMonkey monkeys m1' `op` calculateM
     m1' = fromJust (lookup m1 monkeys)
     m2' = fromJust (lookup m2 monkeys)
 
+-- The MonkeyType says root node, function always solves for Human --
+solve :: [(MonkeyType, Monkey)] -> MonkeyType -> Int
+solve monkeys root = 0
+  where
+    solve' :: Monkey -> Int -> Int
+    -- Current monkey, current rhs total
+    solve' Human rhs = rhs
+    solve' monkey rhs = solve'' 
+
+    
+
+
 main =
   do
     input <- getContents
